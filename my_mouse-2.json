@@ -1,0 +1,320 @@
+{
+    "images": [
+        {
+            "id": 60,
+            "dataset_id": 5,
+            "category_ids": [],
+            "path": "/datasets/my_mouse/img004.png",
+            "width": 542,
+            "height": 540,
+            "file_name": "img004.png",
+            "annotated": false,
+            "annotating": [],
+            "num_annotations": 0,
+            "metadata": {},
+            "deleted": false,
+            "milliseconds": 0,
+            "events": [],
+            "regenerate_thumbnail": false
+        },
+        {
+            "id": 61,
+            "dataset_id": 5,
+            "category_ids": [],
+            "path": "/datasets/my_mouse/img015.png",
+            "width": 542,
+            "height": 540,
+            "file_name": "img015.png",
+            "annotated": false,
+            "annotating": [],
+            "num_annotations": 0,
+            "metadata": {},
+            "deleted": false,
+            "milliseconds": 0,
+            "events": [],
+            "regenerate_thumbnail": false
+        },
+        {
+            "id": 62,
+            "dataset_id": 5,
+            "category_ids": [],
+            "path": "/datasets/my_mouse/img021.png",
+            "width": 542,
+            "height": 540,
+            "file_name": "img021.png",
+            "annotated": false,
+            "annotating": [],
+            "num_annotations": 0,
+            "metadata": {},
+            "deleted": false,
+            "milliseconds": 0,
+            "events": [],
+            "regenerate_thumbnail": false
+        },
+        {
+            "id": 63,
+            "dataset_id": 5,
+            "category_ids": [],
+            "path": "/datasets/my_mouse/img037.png",
+            "width": 542,
+            "height": 540,
+            "file_name": "img037.png",
+            "annotated": false,
+            "annotating": [],
+            "num_annotations": 0,
+            "metadata": {},
+            "deleted": false,
+            "milliseconds": 0,
+            "events": [],
+            "regenerate_thumbnail": false
+        },
+        {
+            "id": 64,
+            "dataset_id": 5,
+            "category_ids": [],
+            "path": "/datasets/my_mouse/img042.png",
+            "width": 542,
+            "height": 540,
+            "file_name": "img042.png",
+            "annotated": false,
+            "annotating": [],
+            "num_annotations": 0,
+            "metadata": {},
+            "deleted": false,
+            "milliseconds": 0,
+            "events": [],
+            "regenerate_thumbnail": false
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "white_mouse",
+            "supercategory": "mouse",
+            "color": "#c99607",
+            "metadata": {},
+            "keypoint_colors": [
+                "#bf5c4d",
+                "#d99100",
+                "#4d8068"
+            ],
+            "keypoints": [
+                "nose_tip",
+                "ass",
+                "tail_tip"
+            ],
+            "skeleton": [
+                [
+                    1,
+                    2
+                ],
+                [
+                    2,
+                    3
+                ]
+            ]
+        }
+    ],
+    "annotations": [
+        {
+            "id": 39,
+            "image_id": 60,
+            "category_id": 1,
+            "segmentation": [
+                [
+                    467.5,
+                    47.6,
+                    467.5,
+                    324.9,
+                    220,
+                    324.9,
+                    220,
+                    47.6
+                ]
+            ],
+            "area": 68696,
+            "bbox": [
+                220,
+                48,
+                248,
+                277
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "color": "#f92123",
+            "keypoints": [
+                419,
+                323,
+                2,
+                390,
+                148,
+                2,
+                220,
+                49,
+                2
+            ],
+            "metadata": {},
+            "num_keypoints": 3
+        },
+        {
+            "id": 41,
+            "image_id": 61,
+            "category_id": 1,
+            "segmentation": [
+                [
+                    458.4,
+                    135.1,
+                    458.4,
+                    453.9,
+                    301.7,
+                    453.9,
+                    301.7,
+                    135.1
+                ]
+            ],
+            "area": 49764,
+            "bbox": [
+                302,
+                135,
+                156,
+                319
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "color": "#60d2f1",
+            "keypoints": [
+                443,
+                433,
+                2,
+                409,
+                330,
+                2,
+                303,
+                136,
+                2
+            ],
+            "metadata": {},
+            "num_keypoints": 3
+        },
+        {
+            "id": 42,
+            "image_id": 62,
+            "category_id": 1,
+            "segmentation": [
+                [
+                    468.9,
+                    133.4,
+                    468.9,
+                    460.3,
+                    305.8,
+                    460.3,
+                    305.8,
+                    133.4
+                ]
+            ],
+            "area": 53301,
+            "bbox": [
+                306,
+                133,
+                163,
+                327
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "color": "#bfa60d",
+            "keypoints": [
+                0,
+                0,
+                0,
+                413,
+                334,
+                2,
+                307,
+                133,
+                2
+            ],
+            "metadata": {},
+            "num_keypoints": 2
+        },
+        {
+            "id": 43,
+            "image_id": 63,
+            "category_id": 1,
+            "segmentation": [
+                [
+                    504.3,
+                    264.8,
+                    504.3,
+                    405.2,
+                    239.9,
+                    405.2,
+                    239.9,
+                    264.8
+                ]
+            ],
+            "area": 36960,
+            "bbox": [
+                240,
+                265,
+                264,
+                140
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "color": "#f2e854",
+            "keypoints": [
+                242,
+                264,
+                2,
+                363,
+                381,
+                2,
+                503,
+                278,
+                2
+            ],
+            "metadata": {},
+            "num_keypoints": 3
+        },
+        {
+            "id": 46,
+            "image_id": 64,
+            "category_id": 1,
+            "segmentation": [
+                [
+                    437.5,
+                    145.2,
+                    437.5,
+                    376.5,
+                    185.6,
+                    376.5,
+                    185.6,
+                    145.2
+                ]
+            ],
+            "area": 58464,
+            "bbox": [
+                186,
+                145,
+                252,
+                232
+            ],
+            "iscrowd": false,
+            "isbbox": true,
+            "color": "#65f2c2",
+            "keypoints": [
+                193,
+                147,
+                2,
+                278,
+                298,
+                2,
+                435,
+                361,
+                2
+            ],
+            "metadata": {},
+            "num_keypoints": 3
+        }
+    ]
+}

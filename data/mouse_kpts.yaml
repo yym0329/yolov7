@@ -1,0 +1,9 @@
+# train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
+train: ../yolo_data/train.txt  
+val: ../yolo_data/test.txt  
+# test: ../coco_kpts/test-dev2017.txt  
+
+# number of classes
+nc: 1
+
+names: [ 'mouse']

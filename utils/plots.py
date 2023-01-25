@@ -23,8 +23,9 @@ from utils.metrics import fitness
 # Settings
 matplotlib.rc('font', **{'size': 11})
 matplotlib.use('Agg')  # for writing to files only
-
-
+image_width = 640
+image_height = 640
+n_kpts = 3
 class Colors:
     # Ultralytics color palette https://ultralytics.com/
     def __init__(self):
@@ -86,27 +87,31 @@ def plot_one_box(x, im, color=None, label=None, line_thickness=3, kpt_label=Fals
 
 def plot_skeleton_kpts(im, kpts, steps, orig_shape=None):
     #Plot the skeleton and keypointsfor coco datatset
-    palette = np.array([[255, 128, 0], [255, 153, 51], [255, 178, 102],
-                        [230, 230, 0], [255, 153, 255], [153, 204, 255],
-                        [255, 102, 255], [255, 51, 255], [102, 178, 255],
-                        [51, 153, 255], [255, 153, 153], [255, 102, 102],
-                        [255, 51, 51], [153, 255, 153], [102, 255, 102],
-                        [51, 255, 51], [0, 255, 0], [0, 0, 255], [255, 0, 0],
-                        [255, 255, 255]])
+    # palette = np.array([[255, 128, 0], [255, 153, 51], [255, 178, 102],
+    #                     [230, 230, 0], [255, 153, 255], [153, 204, 255],
+    #                     [255, 102, 255], [255, 51, 255], [102, 178, 255],
+    #                     [51, 153, 255], [255, 153, 153], [255, 102, 102],
+    #                     [255, 51, 51], [153, 255, 153], [102, 255, 102],
+    #                     [51, 255, 51], [0, 255, 0], [0, 0, 255], [255, 0, 0],
+    #                     [255, 255, 255]])
 
-    skeleton = [[16, 14], [14, 12], [17, 15], [15, 13], [12, 13], [6, 12],
-                [7, 13], [6, 7], [6, 8], [7, 9], [8, 10], [9, 11], [2, 3],
-                [1, 2], [1, 3], [2, 4], [3, 5], [4, 6], [5, 7]]
+    # skeleton = [[16, 14], [14, 12], [17, 15], [15, 13], [12, 13], [6, 12],
+    #             [7, 13], [6, 7], [6, 8], [7, 9], [8, 10], [9, 11], [2, 3],
+    #             [1, 2], [1, 3], [2, 4], [3, 5], [4, 6], [5, 7]]
 
-    pose_limb_color = palette[[9, 9, 9, 9, 7, 7, 7, 0, 0, 0, 0, 0, 16, 16, 16, 16, 16, 16, 16]]
-    pose_kpt_color = palette[[16, 16, 16, 16, 16, 0, 0, 0, 0, 0, 0, 9, 9, 9, 9, 9, 9]]
+    # 3 개의 test 키포인트 숫자로 바꾸기
+    palette = np.array([[255, 128, 0], [255, 153, 51], [255, 178, 102],])
+    skeleton = [[1,2], [2,3]]
+
+    pose_limb_color = palette[[1, 1, 1]]
+    pose_kpt_color = palette[[0,1,2]]
     radius = 5
     num_kpts = len(kpts) // steps
 
     for kid in range(num_kpts):
         r, g, b = pose_kpt_color[kid]
         x_coord, y_coord = kpts[steps * kid], kpts[steps * kid + 1]
-        if not (x_coord % 640 == 0 or y_coord % 640 == 0):
+        if not (x_coord % image_width == 0 or y_coord % image_height == 0):
             if steps == 3:
                 conf = kpts[steps * kid + 2]
                 if conf < 0.5:
@@ -122,9 +127,9 @@ def plot_skeleton_kpts(im, kpts, steps, orig_shape=None):
             conf2 = kpts[(sk[1]-1)*steps+2]
             if conf1<0.5 or conf2<0.5:
                 continue
-        if pos1[0]%640 == 0 or pos1[1]%640==0 or pos1[0]<0 or pos1[1]<0:
+        if pos1[0]%image_width == 0 or pos1[1]%image_height==0 or pos1[0]<0 or pos1[1]<0:
             continue
-        if pos2[0] % 640 == 0 or pos2[1] % 640 == 0 or pos2[0]<0 or pos2[1]<0:
+        if pos2[0] % image_width == 0 or pos2[1] % image_height == 0 or pos2[0]<0 or pos2[1]<0:
             continue
         cv2.line(im, pos1, pos2, (int(r), int(g), int(b)), thickness=2)
 
@@ -216,7 +221,9 @@ def plot_images(images, targets, paths=None, fname='images.jpg', names=None, max
             image_targets = targets[targets[:, 0] == i]
             boxes = xywh2xyxy(image_targets[:, 2:6]).T
             classes = image_targets[:, 1].astype('int')
-            labels = image_targets.shape[1] == 40 if kpt_label else image_targets.shape[1] == 6   # labels if no conf column
+
+            # labels = image_targets.shape[1] == 40 if kpt_label else image_targets.shape[1] == 6   # labels if no conf column
+            labels = image_targets.shape[1] == (6+2*n_kpts) if kpt_label else image_targets.shape[1] == 6   # yym edited, hard coding 6+2*17 =>6+2*n_kpts
             conf = None if labels else image_targets[:, 6]  # check for confidence presence (label vs pred)
             if kpt_label:
                 if conf is None:
@@ -235,6 +242,8 @@ def plot_images(images, targets, paths=None, fname='images.jpg', names=None, max
             boxes[[0, 2]] += block_x
             boxes[[1, 3]] += block_y
 
+
+            # ================= keypoint scaling =========================================
             if kpt_label and kpts.shape[1]:
                 if kpts.max()<1.01:
                     kpts[list(range(0,len(kpts),steps))] *=w # scale to pixels
